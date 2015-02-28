@@ -1,0 +1,50 @@
+<html>
+<head>
+<link rel="stylesheet" href="css/main.css" type="text/css"> 
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script >
+$(document).ready(function(){
+    $(".socket>button").click(function(evt){
+        $.get("../power", $(this).data());
+    });
+});
+</script>
+</head>
+<body>
+<h1>Socket Control</h1>
+
+<div class="socket">
+<label>All Socket's</label> 
+    <button data-socket="0" data-on="1">On</button>
+    <button data-socket="0" data-on="0">Off</button>
+</div>
+
+
+<div class="socket">
+<label>Socket 1 </label>
+    <button data-socket="1" data-on="1">On</button>
+    <button data-socket="1" data-on="0">Off</button>
+</div>
+
+<div class="socket">
+<label>Socket 2</label>
+    <button data-socket="2" data-on="1">On</button>
+    <button data-socket="2" data-on="0">Off</button>
+</div>
+
+<div class="socket">
+<label>Socket 3 </label>
+    <button data-socket="3" data-on="1">On</button>
+    <button data-socket="3" data-on="0">Off</button>
+</div>
+
+<div class="socket">
+<label>Socket 4 </label>
+    <button data-socket="4" data-on="1">On</button>
+    <button data-socket="4" data-on="0">Off</button>
+</div>
+
+
+
+</body>
+</html>

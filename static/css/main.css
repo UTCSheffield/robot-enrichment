@@ -1,0 +1,9 @@
+body, button {
+    font-size: 300%;
+}
+
+
+.socket>label {
+    width: 300px;
+    color: red;
+}
