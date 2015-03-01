@@ -16,7 +16,7 @@ class RobotServer(object):
         
 
     @cherrypy.expose
-    def foward(self, speed=90):
+    def forward(self, speed=90):
         explorerhat.motor.one.forward(speed)
         explorerhat.motor.two.forward(speed)
         self.status = "forward"
@@ -47,7 +47,7 @@ class RobotServer(object):
         return self.do_command(motor)
         
   
-    def handle_analog(pin, value):
+    def handle_analog(self, pin, value):
         print (pin.name, value)
         if (pin.name == "one" and value > 2):
             self.oldstatus = self.status
