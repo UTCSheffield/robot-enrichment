@@ -17,8 +17,8 @@ class RobotServer(object):
 
     @cherrypy.expose
     def forward(self, speed=90):
-        explorerhat.motor.one.forward(speed)
-        explorerhat.motor.two.forward(speed)
+        explorerhat.motor.one.forward(int(speed))
+        explorerhat.motor.two.forward(int(speed))
         self.status = "forward"
         return self.status
     
