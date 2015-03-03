@@ -81,9 +81,9 @@ class RobotServer(object):
     def handle_analog(self, pin, value):
         print (pin.name, value, self.status)
         if (value > 2 and self.status != "stop"):
-            if (self.status != "danger"):
+            if (self.status != "bump"):
                 self.oldstatus = self.status
-            self.status = "danger"
+            self.status = "bump"
             explorerhat.motor.one.stop()
             explorerhat.motor.two.stop()
             time.sleep(0.2)
