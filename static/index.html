@@ -71,7 +71,19 @@ $( "button" ).mouseup(function() {
     $.get(K9URL, {motor:this.id}, k9status);
 });
 
-setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
+var iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
+
+  $("#halt").change(function() {
+    #console.log($("#halt").val());
+    if($("#halt").val() == "Yes") {
+	iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
+    } else {
+        clearInterval(iInterval);
+    }
+
+
+  });
+
 });//]]>  
 
 </script>
@@ -100,7 +112,14 @@ setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
   <a href="/right" target="raw">Right</a>
   <a href="/stop" target="raw">Stop</a>
 </div>
+
 <iframe src="/getstatus" name="raw"></iframe>
+
+  <br />
+  Check server every second <select id="halt">
+    <option selected>Yes</option>
+    <option>No</option>
+</select>
 
  <audio id="danger">
   <source src="http://bricks.utcsheffield.org.uk/k9/k9.wav" type="audio/wav" />
