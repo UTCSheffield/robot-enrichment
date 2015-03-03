@@ -14,8 +14,11 @@ class RobotServer(object):
 
 	self.encoders = {"one":0, "two":0}
 
-        explorerhat.input.one.on_changed(self.handle_encoder)
-        explorerhat.input.two.on_changed(self.handle_encoder)
+        #explorerhat.input.one.on_changed(self.handle_encoder)
+        #explorerhat.input.two.on_changed(self.handle_encoder)
+
+        explorerhat.input.one.on_changed(self.handle_encoder, 15)
+        explorerhat.input.two.on_changed(self.handle_encoder, 15)
         
         self.do_command(initialcommand)
         
