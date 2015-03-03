@@ -14,6 +14,7 @@ class RobotServer(object):
 
 	self.encoders = {"one":0, "two":0}
 
+        explorerhat.input.one.on_changed(self.handle_encoder)
         explorerhat.input.two.on_changed(self.handle_encoder)
         
         self.do_command(initialcommand)
@@ -82,7 +83,7 @@ class RobotServer(object):
         print (pin.name, self.encoders[pin.name], pin.last, pin.read() )
 
     def handle_analog(self, pin, value):
-        #print (pin.name, value)
+        print (pin.name, value)
         if (pin.name == "one" and value > 2):
             self.oldstatus = self.status
             self.status = "danger"
