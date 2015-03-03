@@ -93,13 +93,14 @@ setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
 <div id="out"></div>
 
 <div id="links">
+  <a href="/getstatus" target="raw">Get Status</a>
   <a href="/forward" target="raw">Forward</a>
   <a href="/backward" target="raw">Backward</a>
   <a href="/left" target="raw">Left</a>
   <a href="/right" target="raw">Right</a>
   <a href="/stop" target="raw">Stop</a>
 </div>
-<iframe src="/status" name="raw"></iframe>
+<iframe src="/getstatus" name="raw"></iframe>
 
  <audio id="danger">
   <source src="http://bricks.utcsheffield.org.uk/k9/k9.wav" type="audio/wav" />

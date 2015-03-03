@@ -53,6 +53,10 @@ class RobotServer(object):
     
     @cherrypy.expose
     def index(self):
+        raise cherrypy.HTTPRedirect("/static/index.html")
+
+    @cherrypy.expose
+    def getstatus(self):
         return self.status
     
     def do_command(self, cmd=""):
