@@ -6,7 +6,7 @@ def handle_analog(pin, value):
   if (pin.name == "one" and value > 2):
     explorerhat.motor.one.stop()
     explorerhat.motor.two.stop()
-    time.sleep(0.8)
+    time.sleep(0.4)
     
     explorerhat.motor.one.backward()
     explorerhat.motor.two.backward()
