@@ -4,6 +4,10 @@ import explorerhat, signal, time
 def handle_analog(pin, value):
   print (pin.name, value)
   if (pin.name == "one" and value > 2):
+    explorerhat.motor.one.stop()
+    explorerhat.motor.two.stop()
+    time.sleep(0.8)
+    
     explorerhat.motor.one.backward()
     explorerhat.motor.two.backward()
     time.sleep(1.5)
