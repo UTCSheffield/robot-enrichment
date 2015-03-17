@@ -25,13 +25,18 @@ class RobotServer(object):
     def index(self):
         return self.status
     
+    def do_command(self, cmd=""):
+        if (cmd == "forward"):
+            self.forward()
+        #elif cmd == "backward": 
         
-    #Replicate original k9 interface
-    @cherrypy.expose
-    def k9(self, motor="stop"):
-        # TODO : call the appropriate function
         return self.status
     
+    #Replicate original k9 interface
+    @cherrypy.expose
+    def k9(self, motor=""):
+        return self.do_command(motor)
+        
   
     def handle_analog(pin, value):
         print (pin.name, value)
@@ -48,10 +53,8 @@ class RobotServer(object):
             explorerhat.motor.two.backward()
             time.sleep(1)
             
-            self.forward()
-            # TODO : restart old command
-            #self.status = self.oldstatus
-
+            self.do_command(self.oldstatus)
+            
 if __name__ == '__main__':
     cherrypy.quickstart(RobotServer("foward", config="app.conf")
     
