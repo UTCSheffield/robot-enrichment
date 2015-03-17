@@ -6,13 +6,14 @@ import string
 cherrypy.config.update("server.conf")
 
 class RobotServer(object):
-    def __init__(self, initialcommand):
+    def __init__(self, initialcommand="stop"):
         self.status = "stop"
         
+        #Start listening for the IR sensors to change
         explorerhat.analog.one.changed(self.handle_analog)
         
-        self.initialcommand = initialcommand
-        # TODO : make it start initial command
+        self.do_command(initialcommand)
+        
 
     @cherrypy.expose
     def foward(self, speed=90):
@@ -22,13 +23,21 @@ class RobotServer(object):
         return self.status
     
     @cherrypy.expose
+    def stop(self):
+        explorerhat.motor.one.stop()
+        explorerhat.motor.two.stop()
+        self.status = "stop"
+        return self.status
+    
+    @cherrypy.expose
     def index(self):
         return self.status
     
     def do_command(self, cmd=""):
         if (cmd == "forward"):
             self.forward()
-        #elif cmd == "backward": 
+        elif cmd == "stop":
+            self.stop()
         
         return self.status
     
@@ -56,7 +65,7 @@ class RobotServer(object):
             self.do_command(self.oldstatus)
             
 if __name__ == '__main__':
-    cherrypy.quickstart(RobotServer("foward", config="app.conf")
+    cherrypy.quickstart(RobotServer(), config="app.conf")
     
     
     
