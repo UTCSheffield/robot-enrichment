@@ -31,15 +31,15 @@ class RobotServer(object):
         
     @cherrypy.expose
     def right(self, speed=95):
-        explorerhat.motor.one.left(int(speed))
-        explorerhat.motor.two.right(int(speed))
+        explorerhat.motor.one.forward(int(speed))
+        explorerhat.motor.two.backward(int(speed))
         self.status = "left"
         return self.status
     
     @cherrypy.expose
     def left(self, speed=95):
-        explorerhat.motor.one.right(int(speed))
-        explorerhat.motor.two.left(int(speed))
+        explorerhat.motor.one.backward(int(speed))
+        explorerhat.motor.two.forward(int(speed))
         self.status = "left"
         return self.status
     
