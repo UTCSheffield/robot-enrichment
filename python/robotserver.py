@@ -43,9 +43,14 @@ class RobotServer(object):
     def do_command(self, cmd=""):
         if (cmd == "forward"):
             self.forward()
+        elif cmd == "backward":
+            self.backward()
+        elif cmd == "left":
+            self.left()
+        elif cmd == "right":
+            self.right()
         elif cmd == "stop":
             self.stop()
-        
         return self.status
     
     #Replicate original k9 interface
