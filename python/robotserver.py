@@ -16,10 +16,17 @@ class RobotServer(object):
         
 
     @cherrypy.expose
-    def forward(self, speed=90):
+    def forward(self, speed=95):
         explorerhat.motor.one.forward(int(speed))
         explorerhat.motor.two.forward(int(speed))
         self.status = "forward"
+        return self.status
+    
+    @cherrypy.expose
+    def backward(self, speed=95):
+        explorerhat.motor.one.backward(int(speed))
+        explorerhat.motor.two.backward(int(speed))
+        self.status = "backward"
         return self.status
     
     @cherrypy.expose
