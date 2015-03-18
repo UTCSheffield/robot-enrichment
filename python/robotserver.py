@@ -33,7 +33,7 @@ class RobotServer(object):
     def right(self, speed=95):
         explorerhat.motor.one.forward(int(speed))
         explorerhat.motor.two.backward(int(speed))
-        self.status = "left"
+        self.status = "right"
         return self.status
     
     @cherrypy.expose
