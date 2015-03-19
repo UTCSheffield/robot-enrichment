@@ -82,12 +82,18 @@ class RobotServer(object):
             self.status = "danger"
             explorerhat.motor.one.stop()
             explorerhat.motor.two.stop()
-            time.sleep(0.4)
+            time.sleep(0.2)
             explorerhat.motor.one.backward()
             explorerhat.motor.two.backward()
             time.sleep(0.7)
-            explorerhat.motor.one.forward()
-            explorerhat.motor.two.backward()
+            
+            if (explorerhat.analog.one.read() > explorerhat.analog.two.read()): 
+                explorerhat.motor.one.forward()
+                explorerhat.motor.two.backward()
+            else:
+                explorerhat.motor.one.backward()
+                explorerhat.motor.two.forward()
+                
             time.sleep(0.5)
             
             self.do_command(self.oldstatus)
