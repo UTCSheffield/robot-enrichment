@@ -87,7 +87,7 @@ class RobotServer(object):
             explorerhat.motor.two.backward()
             time.sleep(0.7)
             
-            if (explorerhat.analog.one.read() > explorerhat.analog.two.read()): 
+            if (explorerhat.analog.one.read() < explorerhat.analog.two.read()): 
                 explorerhat.motor.one.forward()
                 explorerhat.motor.two.backward()
             else:
