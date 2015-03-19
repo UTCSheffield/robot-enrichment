@@ -75,7 +75,7 @@ class RobotServer(object):
         
   
     def handle_analog(self, pin, value):
-        print (pin.name, value)
+        print (pin.name, value, self.status)
         if (value > 2):
             self.oldstatus = self.status
             self.status = "danger"
