@@ -11,6 +11,7 @@ class RobotServer(object):
         
         #Start listening for the IR sensors to change
         explorerhat.analog.one.changed(self.handle_analog)
+        explorerhat.analog.two.changed(self.handle_analog)
         
         self.do_command(initialcommand)
         
@@ -74,8 +75,7 @@ class RobotServer(object):
         
   
     def handle_analog(self, pin, value):
-        print (pin.name, value)
-        if (pin.name == "one" and value > 2):
+        if (value > 2):
             self.oldstatus = self.status
             self.status = "danger"
             explorerhat.motor.one.stop()
@@ -83,10 +83,10 @@ class RobotServer(object):
             time.sleep(0.4)
             explorerhat.motor.one.backward()
             explorerhat.motor.two.backward()
-            time.sleep(1.5)
+            time.sleep(0.7)
             explorerhat.motor.one.forward()
             explorerhat.motor.two.backward()
-            time.sleep(1)
+            time.sleep(0.5)
             
             self.do_command(self.oldstatus)
             
