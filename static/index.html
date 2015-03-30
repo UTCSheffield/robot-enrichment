@@ -74,7 +74,6 @@ $( "button" ).mouseup(function() {
 var iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
 
   $("#halt").change(function() {
-    #console.log($("#halt").val());
     if($("#halt").val() == "Yes") {
 	iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
     } else {
