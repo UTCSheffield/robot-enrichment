@@ -6,14 +6,14 @@
   
   <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.js'></script>
   
-  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
   
   <style type='text/css'>
-    button {
+
+button {
     font-size:3em;
     padding: 5px 10px;
     display: inline;
-    background: #777 url(button.png) repeat-x bottom;
+    background: #777 repeat-x bottom;
     border: none;
     color: #fff;
     cursor: pointer;
@@ -71,15 +71,16 @@ $( "button" ).mouseup(function() {
     $.get(K9URL, {motor:this.id}, k9status);
 });
 
-var iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
+var iLength = $("#check").val() *1000;
+//console.log("iLength", iLength);
 
-  $("#halt").change(function() {
-    if($("#halt").val() == "Yes") {
-	iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
-    } else {
-        clearInterval(iInterval);
-    }
+var iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, iLength);
 
+  $("#check").change(function() {
+    var iLength = $("#check").val() *1000;
+    //console.log("iLength", iLength);
+    clearInterval(iInterval);
+    iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, iLength);
 
   });
 
@@ -112,13 +113,22 @@ var iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
   <a href="/stop" target="raw">Stop</a>
 </div>
 
-<iframe src="/getstatus" name="raw"></iframe>
+<!--<video controls style="width:640px;height:360px;">
+  <source src="http://192.168.1.10:8000/" type="video/mp4" />
+</video>-->
+
+<iframe src="/getstatus" name="raw" style="height: 2.5em;" ></iframe>
 
   <br />
-  Check server every second <select id="halt">
-    <option selected>Yes</option>
-    <option>No</option>
-</select>
+  Check server every <select id="check">
+    <option selected>1</option>
+    <option>5</option>
+    <option>10</option>
+    <option>60</option>
+</select> seconds
+
+  <br />
+
 
  <audio id="danger">
   <source src="http://bricks.utcsheffield.org.uk/k9/k9.wav" type="audio/wav" />
