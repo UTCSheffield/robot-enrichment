@@ -73,15 +73,16 @@ $( "button" ).mouseup(function() {
 
 var iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
 
-  $("#halt").change(function() {
+function setGetStatus() {
     if($("#halt").val() == "Yes") {
-	iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
+        iInterval = setInterval(function(){ $.get(K9URL, {}, k9status); }, 1000);
     } else {
         clearInterval(iInterval);
     }
+  }
 
-
-  });
+  $("#halt").change(setGetStatus);
+  setGetStatus();
 
 });//]]>  
 
