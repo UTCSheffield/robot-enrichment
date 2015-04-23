@@ -90,14 +90,15 @@ class RobotServer(object):
         return self.do_command(motor)
         
   
-    def handle_analog(self, pin, value):
-        print (pin.name, value, self.status)
-        if (value > 0.2 and self.status == "search"):
+    def handle_analog(self, pin, value):        
+        #print (pin.name, value, self.status)
+
+        if (value > 0.1 and self.status == "search"):
             sensor1 = explorerhat.analog.one.read();
             sensor2 = explorerhat.analog.two.read();
             
             diff = abs(100*(sensor2-sensor1)/min(sensor2,sensor1));
-            print(diff)
+            print (sensor1, sensor2, diff);
             
             if (diff < 10): 
                 explorerhat.motor.one.forward()
@@ -106,10 +107,10 @@ class RobotServer(object):
                 explorerhat.motor.one.backward()
                 explorerhat.motor.two.forward()
                 
-            time.sleep(0.1)
+            time.sleep(0.01)
             
 if __name__ == '__main__':
-    cherrypy.quickstart(RobotServer(), config="app.conf")
+    cherrypy.quickstart(RobotServer( initialcommand="search"), config="app.conf")
     
     
     
