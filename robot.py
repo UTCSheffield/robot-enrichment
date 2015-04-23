@@ -92,7 +92,7 @@ class RobotServer(object):
   
     def handle_analog(self, pin, value):
         print (pin.name, value, self.status)
-        if (value > 0.2 and self.status === "search"):
+        if (value > 0.2 and self.status == "search"):
             sensor1 = explorerhat.analog.one.read();
             sensor2 = explorerhat.analog.two.read();
             
