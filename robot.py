@@ -80,20 +80,16 @@ class RobotServer(object):
   
     def handle_analog(self, pin, value):
         print (pin.name, value, self.status)
-        if (value > 2 and self.status != "stop"):
-            if (self.status != "bump"):
-                self.oldstatus = self.status
-            self.status = "bump"
-            explorerhat.motor.one.stop()
-            explorerhat.motor.two.stop()
-            time.sleep(0.2)
-            explorerhat.motor.one.backward()
-            explorerhat.motor.two.backward()
-            time.sleep(0.7)
+        if (value > 0.2 and self.status != "stop"):
+            sensor1 = explorerhat.analog.one.read();
+            sensor2 = explorerhat.analog.two.read();
             
-            if (explorerhat.analog.one.read() < explorerhat.analog.two.read()): 
+            diff = abs(100*(sensor2-sensor1)/min(sensor2,sensor1));
+            print(diff)
+            
+            if (diff < 10): 
                 explorerhat.motor.one.forward()
-                explorerhat.motor.two.backward()
+                explorerhat.motor.two.forward()
             else:
                 explorerhat.motor.one.backward()
                 explorerhat.motor.two.forward()
