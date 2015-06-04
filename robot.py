@@ -29,6 +29,8 @@ class RobotServer(object):
         explorerhat.motor.two.backward(int(speed))
         self.status = "backward"
         return self.status
+ 
+        
         
     @cherrypy.expose
     def right(self, speed=95):
@@ -44,6 +46,13 @@ class RobotServer(object):
         self.status = "left"
         return self.status
     
+    @cherrypy.expose
+    def search(self, speed=95):
+        explorerhat.motor.one.backward(int(speed))
+        explorerhat.motor.two.forward(int(speed))
+        self.status = "search"
+        return self.status
+        
     @cherrypy.expose
     def stop(self):
         explorerhat.motor.one.stop()
@@ -62,6 +71,9 @@ class RobotServer(object):
     def do_command(self, cmd=""):
         if (cmd == "forward"):
             self.forward()
+        elif cmd == "search":
+            self.search()
+            
         elif cmd == "backward":
             self.backward()
         elif cmd == "left":
@@ -80,7 +92,7 @@ class RobotServer(object):
   
     def handle_analog(self, pin, value):
         print (pin.name, value, self.status)
-        if (value > 0.2 and self.status != "stop"):
+        if (value > 0.2 and self.status === "search"):
             sensor1 = explorerhat.analog.one.read();
             sensor2 = explorerhat.analog.two.read();
             
@@ -94,9 +106,7 @@ class RobotServer(object):
                 explorerhat.motor.one.backward()
                 explorerhat.motor.two.forward()
                 
-            time.sleep(0.5)
-            
-            self.do_command(self.oldstatus)
+            time.sleep(0.1)
             
 if __name__ == '__main__':
     cherrypy.quickstart(RobotServer(), config="app.conf")
