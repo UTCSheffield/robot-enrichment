@@ -48,8 +48,8 @@ class RobotServer(object):
     
     @cherrypy.expose
     def search(self, speed=95):
-        explorerhat.motor.one.backward(int(speed))
-        explorerhat.motor.two.forward(int(speed))
+        #explorerhat.motor.one.backward(int(speed))
+        #explorerhat.motor.two.forward(int(speed))
         self.status = "search"
         return self.status
         
