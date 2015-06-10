@@ -100,12 +100,14 @@ class RobotServer(object):
             diff = abs(100*(sensor2-sensor1)/min(sensor2,sensor1));
             print (sensor1, sensor2, diff);
             
-            if (diff < 10): 
-                explorerhat.motor.one.forward()
-                explorerhat.motor.two.forward()
+            if (diff < 10):
+                print("Charge")
+                #explorerhat.motor.one.forward()
+                #explorerhat.motor.two.forward()
             else:
-                explorerhat.motor.one.backward()
-                explorerhat.motor.two.forward()
+                print("Left")
+                #explorerhat.motor.one.backward()
+                #explorerhat.motor.two.forward()
                 
             time.sleep(0.01)
             
